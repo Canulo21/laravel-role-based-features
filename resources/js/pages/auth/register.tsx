@@ -49,7 +49,6 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={handleRegister} className="grid gap-6">
-                {/* First Name */}
                 <div className="grid gap-2">
                     <Label htmlFor="fname">First Name</Label>
                     <Input
@@ -68,7 +67,6 @@ export default function Register() {
                     <InputError message={errors.fname} className="mt-2" />
                 </div>
 
-                {/* Middle Name */}
                 <div className="grid gap-2">
                     <Label htmlFor="mname">Middle Name</Label>
                     <Input
@@ -85,7 +83,6 @@ export default function Register() {
                     <InputError message={errors.mname} className="mt-2" />
                 </div>
 
-                {/* Last Name */}
                 <div className="grid gap-2">
                     <Label htmlFor="lname">Last Name</Label>
                     <Input
@@ -103,9 +100,7 @@ export default function Register() {
                     <InputError message={errors.lname} className="mt-2" />
                 </div>
 
-                {/* Gender & Role */}
                 <div className="grid grid-cols-2 gap-2">
-                    {/* Gender */}
                     <div className="grid gap-2">
                         <Label htmlFor="gender">Gender</Label>
                         <Select
@@ -127,8 +122,6 @@ export default function Register() {
                         </Select>
                         <InputError message={errors.gender} />
                     </div>
-
-                    {/* Role */}
                     <div className="grid gap-2">
                         <Label htmlFor="role">Role</Label>
                         <Select
@@ -149,8 +142,6 @@ export default function Register() {
                         <InputError message={errors.role} />
                     </div>
                 </div>
-
-                {/* Email */}
                 <div className="grid gap-2">
                     <Label htmlFor="email">Email address</Label>
                     <Input
@@ -166,8 +157,6 @@ export default function Register() {
                     />
                     <InputError message={errors.email} />
                 </div>
-
-                {/* Password */}
                 <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
                     <div className="relative">
@@ -183,10 +172,8 @@ export default function Register() {
                             onChange={(e) =>
                                 setData('password', e.target.value)
                             }
-                            className="pr-10" // space for the icon
+                            className="pr-10"
                         />
-
-                        {/* Eye icon inside the input */}
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
@@ -202,7 +189,6 @@ export default function Register() {
                     </div>
                 </div>
 
-                {/* Confirm Password */}
                 <div className="grid gap-2">
                     <Label htmlFor="password_confirmation">
                         Confirm password
@@ -220,10 +206,9 @@ export default function Register() {
                             onChange={(e) =>
                                 setData('password_confirmation', e.target.value)
                             }
-                            className="pr-10" // space for the icon
+                            className="pr-10"
                         />
 
-                        {/* Eye icon inside the input */}
                         <button
                             type="button"
                             onClick={() =>
@@ -241,7 +226,6 @@ export default function Register() {
                     </div>
                 </div>
 
-                {/* Submit */}
                 <Button
                     type="submit"
                     className="mt-2 w-full"
@@ -253,7 +237,6 @@ export default function Register() {
                     Create account
                 </Button>
 
-                {/* Login link */}
                 <div className="mt-2 text-center text-sm text-muted-foreground">
                     Already have an account?{' '}
                     <TextLink href={login()} tabIndex={10}>

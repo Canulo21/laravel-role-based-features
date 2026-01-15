@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import HeadingSmall from '@/components/heading-small';
@@ -12,6 +12,7 @@ import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { edit } from '@/routes/user-password';
 import { type BreadcrumbItem } from '@/types';
+import { Eye, EyeClosed } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -23,6 +24,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Password() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
+
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -66,15 +71,36 @@ export default function Password() {
                                         Current password
                                     </Label>
 
-                                    <Input
-                                        id="current_password"
-                                        ref={currentPasswordInput}
-                                        name="current_password"
-                                        type="password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="current-password"
-                                        placeholder="Current password"
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            id="current_password"
+                                            ref={currentPasswordInput}
+                                            name="current_password"
+                                            type={
+                                                showCurrentPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                            }
+                                            className="mt-1 block w-full"
+                                            autoComplete="current-password"
+                                            placeholder="Current password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setShowCurrentPassword(
+                                                    !showCurrentPassword,
+                                                )
+                                            }
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500"
+                                        >
+                                            {showCurrentPassword ? (
+                                                <Eye />
+                                            ) : (
+                                                <EyeClosed />
+                                            )}
+                                        </button>
+                                    </div>
 
                                     <InputError
                                         message={errors.current_password}
@@ -85,16 +111,36 @@ export default function Password() {
                                     <Label htmlFor="password">
                                         New password
                                     </Label>
-
-                                    <Input
-                                        id="password"
-                                        ref={passwordInput}
-                                        name="password"
-                                        type="password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        placeholder="New password"
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            id="password"
+                                            ref={passwordInput}
+                                            name="password"
+                                            type={
+                                                showNewPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                            }
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                            placeholder="New password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setShowNewPassword(
+                                                    !showNewPassword,
+                                                )
+                                            }
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500"
+                                        >
+                                            {showNewPassword ? (
+                                                <Eye />
+                                            ) : (
+                                                <EyeClosed />
+                                            )}
+                                        </button>
+                                    </div>
 
                                     <InputError message={errors.password} />
                                 </div>
@@ -104,14 +150,35 @@ export default function Password() {
                                         Confirm password
                                     </Label>
 
-                                    <Input
-                                        id="password_confirmation"
-                                        name="password_confirmation"
-                                        type="password"
-                                        className="mt-1 block w-full"
-                                        autoComplete="new-password"
-                                        placeholder="Confirm password"
-                                    />
+                                    <div className="relative">
+                                        <Input
+                                            id="password_confirmation"
+                                            name="password_confirmation"
+                                            type={
+                                                showConfirmPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                            }
+                                            className="mt-1 block w-full"
+                                            autoComplete="new-password"
+                                            placeholder="Confirm password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setShowConfirmPassword(
+                                                    !showConfirmPassword,
+                                                )
+                                            }
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500"
+                                        >
+                                            {showConfirmPassword ? (
+                                                <Eye />
+                                            ) : (
+                                                <EyeClosed />
+                                            )}
+                                        </button>
+                                    </div>
 
                                     <InputError
                                         message={errors.password_confirmation}
