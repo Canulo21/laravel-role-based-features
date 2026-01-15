@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -10,10 +13,33 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+
+Route::middleware(['auth'])->get('/dashboard', function () {
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard.index');
+    }
+
+    if ($user->role === 'user') {
+        return redirect()->route('user.dashboard.index');
+    }
+
+    return redirect()->route('home');
+})->name('dashboard');
+
+
+// Admin
+Route::middleware(['auth', AdminMiddleware::class])->group(function(){
+    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        ->name('admin.dashboard.index');
 });
+
+// User
+Route::middleware(['auth', UserMiddleware::class])->group(function(){
+    Route::get('/user/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])
+        ->name('user.dashboard.index');
+});
+
 
 require __DIR__.'/settings.php';
