@@ -3,7 +3,6 @@ import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
     SidebarContent,
@@ -17,10 +16,16 @@ import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 
 import AppLogo from '../app-logo';
+import { UserNavUser } from './user-nav-user';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
+        href: '/user/dashboard',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'About',
         href: '/user/dashboard',
         icon: LayoutGrid,
     },
@@ -60,7 +65,7 @@ export function UserSidebar() {
 
             <SidebarFooter>
                 <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
+                <UserNavUser />
             </SidebarFooter>
         </Sidebar>
     );

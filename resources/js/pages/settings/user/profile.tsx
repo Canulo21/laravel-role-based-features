@@ -6,10 +6,8 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
-import { edit } from '@/routes/profile';
 import { type BreadcrumbItem, type SharedData } from '@/types';
+
 import {
     Select,
     SelectContent,
@@ -17,17 +15,19 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '../../components/ui/select';
-import { Spinner } from '../../components/ui/spinner';
+} from '../../../components/ui/select';
+import { Spinner } from '../../../components/ui/spinner';
+import UserSettingsLayout from '../../../layouts/settings/user-settings-layout';
+import UserLayout from '../../../layouts/user-layout';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Profile settings',
-        href: edit().url,
+        href: '/user/settings/profile',
     },
 ];
 
-export default function Profile({
+export default function UserProfile({
     mustVerifyEmail,
     status,
 }: {
@@ -47,16 +47,16 @@ export default function Profile({
     const handleUpdateProfile = (e: React.FormEvent) => {
         e.preventDefault();
 
-        patch(edit().url);
+        patch('/user/settings/profile');
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <UserLayout breadcrumbs={breadcrumbs}>
             <Head title="Profile settings" />
 
             <h1 className="sr-only">Profile Settings</h1>
 
-            <SettingsLayout>
+            <UserSettingsLayout>
                 <div className="space-y-6">
                     <HeadingSmall
                         title="Profile information"
@@ -192,7 +192,7 @@ export default function Profile({
                 </div>
 
                 <DeleteUser />
-            </SettingsLayout>
-        </AppLayout>
+            </UserSettingsLayout>
+        </UserLayout>
     );
 }

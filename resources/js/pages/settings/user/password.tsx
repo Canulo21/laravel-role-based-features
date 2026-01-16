@@ -8,12 +8,11 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
 import { edit } from '@/routes/user-password';
 import { type BreadcrumbItem } from '@/types';
-
 import { Eye, EyeClosed } from 'lucide-react';
+import UserSettingsLayout from '../../../layouts/settings/user-settings-layout';
+import UserLayout from '../../../layouts/user-layout';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,7 +21,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Password() {
+export default function UserPassword() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
@@ -31,12 +30,12 @@ export default function Password() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <UserLayout breadcrumbs={breadcrumbs}>
             <Head title="Password settings" />
 
             <h1 className="sr-only">Password Settings</h1>
 
-            <SettingsLayout>
+            <UserSettingsLayout>
                 <div className="space-y-6">
                     <HeadingSmall
                         title="Update password"
@@ -210,7 +209,7 @@ export default function Password() {
                         )}
                     </Form>
                 </div>
-            </SettingsLayout>
-        </AppLayout>
+            </UserSettingsLayout>
+        </UserLayout>
     );
 }

@@ -8,10 +8,11 @@ import TwoFactorSetupModal from '@/components/two-factor-setup-modal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
 import { disable, enable, show } from '@/routes/two-factor';
 import { type BreadcrumbItem } from '@/types';
+
+import UserSettingsLayout from '../../../layouts/settings/user-settings-layout';
+import UserLayout from '../../../layouts/user-layout';
 
 interface TwoFactorProps {
     requiresConfirmation?: boolean;
@@ -25,7 +26,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function TwoFactor({
+export default function UserTwoFactor({
     requiresConfirmation = false,
     twoFactorEnabled = false,
 }: TwoFactorProps) {
@@ -42,12 +43,12 @@ export default function TwoFactor({
     const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <UserLayout breadcrumbs={breadcrumbs}>
             <Head title="Two-Factor Authentication" />
 
             <h1 className="sr-only">Two-Factor Authentication Settings</h1>
 
-            <SettingsLayout>
+            <UserSettingsLayout>
                 <div className="space-y-6">
                     <HeadingSmall
                         title="Two-Factor Authentication"
@@ -135,7 +136,7 @@ export default function TwoFactor({
                         errors={errors}
                     />
                 </div>
-            </SettingsLayout>
-        </AppLayout>
+            </UserSettingsLayout>
+        </UserLayout>
     );
 }
